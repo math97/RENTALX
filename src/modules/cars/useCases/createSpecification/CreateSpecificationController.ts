@@ -7,14 +7,14 @@ import {
 } from "./CreateSpecificationUseCase";
 
 class CreateSpecificationController {
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, description }: IRequest = request.body;
 
     const createSpecificationUseCase = container.resolve(
       CreateSpecificationUseCase
     );
 
-    createSpecificationUseCase.execute({ name, description });
+    await createSpecificationUseCase.execute({ name, description });
 
     return response.status(201).send();
   }
